@@ -1,3 +1,7 @@
+let titulo
+let autor
+let title
+
 class Usuario {
     constructor (nombre, apellido, libros, mascotas) {
         this.nombre = nombre
@@ -20,25 +24,27 @@ class Usuario {
         return (`Tengo ${cantidadMascotas} mascotas`)
     }
 
+
     addBook() {
-        this.libros.push({nombre: tituloLibro, autor: autorLibro})
+        this.libros.push({nombre: titulo, autor: autor})
         return (this.libros)
     }
 
     getBookNames() {
-        this.libros.map(libro => nombreLibro.push(libro.nombre))
-        return console.log(`Los libros son: ${nombreLibro}`)
+        this.libros.map(libro => console.log(libro.nombre))
     }
 }
 
-const usuario = new Usuario ("Valeria", "Perone", [{nombre: "Rayuela", autor: "Julio Cortazar"}], "perro")
+const usuario = new Usuario ("Valeria", "Perone", {nombre: "Rayuela", autor: "Julio Cortazar"}, "perro")
 
 console.log(usuario);
 console.log(usuario.getFullName());
-console.log(usuario.addMascota("gato"));
+usuario.addMascota("gato");
 console.log(usuario.countMascotas());
+console.log(usuario.mascotas)
 console.log(usuario.libros);
-console.log(usuario.addBook("Cien años de soledad", "Gabriel García Marquez"));
-console.log(usuario.addBook("Las venas abiertas de América Latina", "Eduardo Galeano"));
+usuario.addBook(titulo = "Cien años de soledad", autor = "Gabriel García Marquez");
+usuario.addBook(titulo = "Las venas abiertas de América Latina", autor = "Eduardo Galeano");
 console.log(usuario.libros);
-console.log(usuario.getBookNames);
+console.log ("Mis libros son:") + usuario.getBookNames()
+
