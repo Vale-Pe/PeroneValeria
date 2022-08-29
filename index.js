@@ -1,50 +1,86 @@
-let titulo
-let autor
-let title
+const fs = require('fs');
 
-class Usuario {
-    constructor (nombre, apellido, libros, mascotas) {
-        this.nombre = nombre
-        this.apellido = apellido
-        this.libros = [libros]
-        this.mascotas = [mascotas]
+/* const productos = [
+    {
+        title:'Escuadra',
+        price: 123.45,
+        thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',
+        id: 1
+    },{
+        title: 'Calculadora',
+        price: 234.56,
+        thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png',
+        id: 2
+    },
+    {
+        title: 'Globo Terráqueo',
+        price: 345.67,
+        thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png',
+        id: 3
+    }
+]  */
+
+class Contenedor {
+    async save(producto) {
+        try {
+            await fs.promises.writeFile(
+                './productos.txt',
+                JSON.stringify(producto, null, 2),
+                'utf-8'
+            );
+        } catch(e) {
+            console.log(e);
+        }
     }
 
-    getFullName() {
-        return (`Mi nombre es ${this.nombre} ${this.apellido}`)
+    async getAll() {
+        try {
+            const contenido = await fs.promises.readFile('./productos.txt', 'utf-8');
+            //console.log(contenido);
+            return JSON.parse(contenido);
+        } catch(error) {
+            console.log(error);
+        }
     }
-
-    addMascota (nombreMascota) {
-        this.mascotas.push(nombreMascota)
-        return (this.mascotas)
+    async saveNew(productoNuevo) {
+        const contenido = await this.getAll();
+        const indice = contenido.sort((a,b) => b.id - a.id)[0].id;
+        productoNuevo.id = indice + 1;
+        contenido.push(productoNuevo);
+        this.save(contenido);
     }
-
-    countMascotas() {
-        let cantidadMascotas = this.mascotas.length
-        return (`Tengo ${cantidadMascotas} mascotas`)
+    async getById(id) {
+        const contenido = await this.getAll();
+        const productoBuscado = contenido.filter(producto => producto.id === id)
+        console.log(productoBuscado)
     }
-
-
-    addBook() {
-        this.libros.push({nombre: titulo, autor: autor})
-        return (this.libros)
+    async deleteById(id) {
+        const contenido = await this.getAll();
+        const productoEliminado = contenido.filter(producto => producto.id !== id)
+        this.save(productoEliminado)
+        console.log(productoEliminado)
     }
-
-    getBookNames() {
-        this.libros.map(libro => console.log(libro.nombre))
-    }
+    async deleteAll() {
+        const contenido = await this.getAll();
+        const productosEliminados = contenido.splice(0, contenido.length)
+        //console.log(productosEliminados)
+        console.log(contenido)
+        this.save(contenido);
+    } 
 }
 
-const usuario = new Usuario ("Valeria", "Perone", {nombre: "Rayuela", autor: "Julio Cortazar"}, "perro")
+const contenedor = new Contenedor();
 
-console.log(usuario);
-console.log(usuario.getFullName());
-usuario.addMascota("gato");
-console.log(usuario.countMascotas());
-console.log(usuario.mascotas)
-console.log(usuario.libros);
-usuario.addBook(titulo = "Cien años de soledad", autor = "Gabriel García Marquez");
-usuario.addBook(titulo = "Las venas abiertas de América Latina", autor = "Eduardo Galeano");
-console.log(usuario.libros);
-console.log ("Mis libros son:") + usuario.getBookNames()
+contenedor.save(productos);
 
+//contenedor.getAll(); --> Trae todos los productos guardados
+const productoN =     {
+    title:'Mochila',
+    price: 300.5,
+    thumbnail: 'https://cdn2.iconfinder.com/data/icons/school-supplies-7/64/164_school-study-education-bag-backpack-128.png',
+}
+
+//contenedor.saveNew(productoN) --> Guarda producto nuevo
+//contenedor.getById(1); --> Trae el producto compatible con el indice indicado
+//contenedor.deleteById(2);--> Elimina el producto que tiene el indice indicado
+//contenedor.deleteAll(); --> vacia el array, eliminando todos los productos
