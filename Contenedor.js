@@ -2,13 +2,13 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 
-const PORT = 8080/* process.env.PORT || 3000 */
+const PORT = process.env.PORT || 8080
 
 const server = app.listen(PORT, () => {
     console.log("Servidor iniciado")
 })
 
-/* const productos = [
+const productos = [
     {
         title:'Escuadra',
         price: 123.45,
@@ -26,10 +26,10 @@ const server = app.listen(PORT, () => {
         thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png',
         id: 3
     }
-] */
+]
 
 class Contenedor {
-    /* async save(producto) {
+    async save(producto) {
         try {
             await fs.promises.writeFile(
                 './productos.txt',
@@ -39,7 +39,7 @@ class Contenedor {
         } catch(e) {
             console.log(e);
         }
-    } */
+    }
 
     async getAll() {
         try {
@@ -82,11 +82,11 @@ const contenedor = new Contenedor();
 //contenedor.save(productos);
 
 contenedor.getAll(); //--> Trae todos los productos guardados
-/* const productoN =     {
+const productoN =     {
     title:'Mochila',
     price: 300.5,
     thumbnail: 'https://cdn2.iconfinder.com/data/icons/school-supplies-7/64/164_school-study-education-bag-backpack-128.png',
-} */
+}
 
 //contenedor.saveNew(productoN) ////--> Guarda producto nuevo
 //contenedor.getById(1); //--> Trae el producto compatible con el indice indicado
@@ -95,18 +95,20 @@ contenedor.getAll(); //--> Trae todos los productos guardados
 
 //DESAFIO 3
 
-const contenedorProductos = new Contenedor("productos.txt")
+/* const contenedorProductos = new Contenedor("productos.txt")
 
-app.get('/productos', async (req , resp)=>{
+app.get('/productos', async (req , resp) => {
     const productos = await contenedorProductos.getAll()
     resp.send(productos)
 })
     
 
-app.get('/productoRandom', async (req , resp)=>{
+app.get('/productoRandom', async (req , resp)=> {
     const productos = await contenedorProductos.getAll()
     let id = productos.map(p => p.id)
     const productoRandom = await 
     contenedorProductos.getById(Math.floor(Math.random()*id.length + 1))
     resp.send(productoRandom)
-})
+}) */
+
+module.exports = Contenedor;

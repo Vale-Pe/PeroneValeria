@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+form input {
+    height: 1.5rem;
+    width: 50vw;
+    padding: 4px;
+    margin-top: 4px;
+    border: 1px solid aquamarine;
+    border-radius: 10px;
+}
+
+.button {
+    height: 2rem;
+    width: 150px;
+    padding: 8px;
+    align-self: center;
+    border: none;
+    background-color: aquamarine;
+    color: darkslategrey;
+}
