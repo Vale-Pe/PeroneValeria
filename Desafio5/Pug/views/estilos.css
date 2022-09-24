@@ -1,0 +1,20 @@
+.table td, .table th {
+    vertical-align: middle;
+    border: 1px solid aquamarine;
+}
+h1 {
+    color: black;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 12px;
+}
+.vista {
+    min-height: calc(100vh - 16px);
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.btn {
+    background-color: aquamarine;
+}

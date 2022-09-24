@@ -1,0 +1,25 @@
+
+<div class="vista">
+    <h1>Vista de Productos</h1>
+
+    <% if(hayProductos) { %>
+        <div class="table-responsive">
+            <table class="table table-bordered mt-2 text-center">
+                <tr> 
+                    <th>Nombre</th> <th>Precio</th> 
+                    <th>Foto</th>
+                </tr>
+                <% productos.forEach((producto) => { %>
+                    <tr> 
+                        <td><%= producto.title %></td> 
+                        <td>$<%= producto.price %></td> 
+                        <td><img width="50" src=<%=producto.thumbnail %> alt="not found"></td> 
+                    </tr>
+                <% }) %>   
+            </table>
+        </div>
+        <a class="align-self-center" href="http://localhost:8080/"><button class="btn">Agregar más productos</button></a>
+    <% } else {%>  
+            <h1 class="alert alert-danger">No se encontraron productos</h1>
+    <% } %>
+</div>
