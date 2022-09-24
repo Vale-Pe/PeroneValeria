@@ -1,0 +1,24 @@
+head
+    style 
+        include estilos.css
+div(class="vista")
+    h1 Vista de Productos
+    if hayProductos
+        div(class="table-responsive")
+            table(class="table table-bordered mt-2 text-center")
+                tr 
+                    th Nombre 
+                    th Precio 
+                    th Foto
+                each producto in productos
+                    tr 
+                        td=producto.title
+                        td=producto.price
+                        td 
+                            img(width="50" src=producto.thumbnail alt="not found")
+        a(class="align-self-center" href="http://localhost:8080/") 
+            button(class="btn") Agregar más productos
+    else 
+        h3 No se encontraron productos
+
+

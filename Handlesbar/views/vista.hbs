@@ -1,0 +1,40 @@
+<style>
+    .table td, .table th {
+        vertical-align: middle;
+        border: 1px solid aquamarine;
+    }
+    h1 {
+        color: black;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-top: 12px;
+    }
+    .vista {
+        min-height: calc(100vh - 16px);
+        width: 70vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .btn {
+        background-color: aquamarine;
+    }
+</style>
+
+<div class="vista">
+    <h1>Vista de Productos</h1>
+
+    {{#if hayProductos}} 
+        <div class="table-responsive">
+            <table class="table table-bordered mt-2 text-center">
+                <tr> <th>Nombre</th> <th>Precio</th> <th>Foto</th></tr>
+                {{#each productos}}
+                    <tr> <td>{{this.title}}</td> <td>${{this.price}}</td> <td><img width="50" src={{this.thumbnail}} alt="not found"></td> </tr>
+                {{/each}}
+            </table>
+        </div>
+        <a class="align-self-center" href="http://localhost:8080/"><button class="btn" onclick="http://localhost:8080/">Agregar más productos</button></a>
+    {{else}}  
+        <h1 class="alert alert-danger">No se encontraron productos</h1>
+    {{/if}}
+</div>

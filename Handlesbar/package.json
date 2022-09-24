@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.7",
+    "pug": "^3.0.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "peronevaleria",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vale-Pe/PeroneValeria.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vale-Pe/PeroneValeria/issues"
+  },
+  "homepage": "https://github.com/Vale-Pe/PeroneValeria#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
