@@ -34,7 +34,7 @@ router.post("/productos/guardar", (req, res) => {
 	let producto = req.body;
 	productos.guardar(producto);
 	//res.json(producto)
-	res.redirect("/");
+	res.redirect("/api/productos/vista");
 });
 
 router.put("/productos/actualizar/:id", (req, res) => {
