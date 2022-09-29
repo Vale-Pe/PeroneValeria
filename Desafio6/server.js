@@ -26,7 +26,11 @@ const messages = [
     { author: "Ana", date: formatDate, text: "¡Genial!" }
 ];
 
-const products = [];
+const products = [
+	{ nombre: "Escuadra", precio: 200, foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-128.png" },
+	{ nombre: "calculadora", precio: 459, foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-128.png" },
+	{ nombre: "agenda", precio: 150, foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-128.png" }
+];
 
 io.on('connection', (socket) => { // "connection" se ejecuta la primera vez que se abre una nueva conexión
     console.log('Nuevo cliente conectado') // Se imprimirá solo la primera vez que se ha abierto la conexión    

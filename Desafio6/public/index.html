@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <div>
+    <div class="container mt-3 pt-3 div_productos">
         <div>
-            <h1>Cargar Producto</h1>
+            <h3>Cargar Producto</h3>
             <form onsubmit="addProduct(this)"  autocomplete="off">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
@@ -32,10 +32,10 @@
             </form>
         </div>
 
-        <div class="container mt-3">
+        <div class="container my-3 ">
             <table class="table table-hover">
                 <thead>
-                    <tr class="table-light">
+                    <tr class="table-light text-center">
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Foto</th>
@@ -47,15 +47,14 @@
         </div>
     </div>
 
-    <div>
-        <h1>Mi App Chat</h1>
-
-        <div id="messages"></div>
-        
+    <div class="container my-3 py-3 div_mensajes">
+        <h3>Mi App Chat</h3>
+    
         <form onsubmit="return addMessage(this)">
-            <input type="text" id="username" placeholder="Tu Nombre" >
-            <input type="text" id="texto" placeholder="Cuéntanos algo...">
-            <input type="submit" value="Enviar" id="submitChat">
+            <input type="email" id="username" class="form-control" placeholder="xxxxx@mail.com" >
+            <div id="messages"></div>
+            <input type="text" id="texto" class="form-control" placeholder="Escribe algo...">
+            <input type="submit" value="Enviar" id="submitChat" class="btn button">
         </form>
     </div>
 

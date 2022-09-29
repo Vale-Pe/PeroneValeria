@@ -9,7 +9,7 @@ socket.on('messages', (data) => { renderMessage(data); });
 function renderProduct(data) {
 	const html = data
 		.map((producto) => {
-            let str = `<tr class="table-light">
+            let str = `<tr class="table-light text-center">
                         <td>${producto.nombre}</td>
                         <td>${producto.precio}</td>
                         <td><img width=50 src='${producto.foto}' alt="imgProducto"></td>
@@ -53,8 +53,4 @@ function addMessage(e) {
     };
     socket.emit('new-message', mensaje);
     return false;
-}
-
-function table() {
-
 }
