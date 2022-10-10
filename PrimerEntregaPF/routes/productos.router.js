@@ -1,5 +1,5 @@
 import express from "express";
-import Producto from "../clases/Producto.class.js";// importo porque necesito tener acceso a los metodos de productos
+import Producto from "../clases/Producto.class.js";
 
 const router = express.Router();
 
@@ -15,23 +15,32 @@ function validarAdmin(req, res, next) {
 
 router.post("/", validarAdmin, (req, res) => {
 	console.log(req.body);
-	const productoCreado = producto.guardar(req.body);
-	res.send(productoCreado);
+	producto.save(req.body).then(productoCreado => {
+	res.send(productoCreado)
+	})
 });
 
-router.delete("/:id", validarAdmin, (req, res) => {
-	const productoBorrado = producto.borrar(req.params.id);
+router.delete("/:id", validarAdmin, async (req, res) => {
+	const productoBorrado = await producto.borrar(req.params.id);
 	res.send(productoBorrado);
 });
 
 router.get("/", (req, res) => {
-	const listaProductos = producto.listarAll();
+	producto.getAll().then(listaProductos => {
 	res.send(listaProductos);
+	})
 });
 
-router.get("/:id", (req, res) => {
-	const productoBuscado = producto.listar(req.params.id);
-	res.send(productoBuscado);
+router.get("/:id", async (req, res) => {
+	const productoBuscado = Number(req.params.id);
+	const cont = await producto.getById(productoBuscado);
+	res.send(cont);
 });
+
+router.put('/:id', validarAdmin, async (req, res) => {
+	const {nombre, descripcion, codigo, foto, precio, stock, timeStamp} = req.body;
+	const id = await producto.put(Number(req.params.id), {nombre, descripcion, codigo, foto, precio, stock, timeStamp});
+	res.json(id);
+})
 
 export default router;

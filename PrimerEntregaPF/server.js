@@ -1,5 +1,6 @@
+
 import express from "express";
-import routerCarrito from "./routes/carritos.router.js";
+import routerCarritos from "./routes/carritos.router.js";
 import routerProductos from "./routes/productos.router.js";
 
 const app = express();
@@ -7,10 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/productos", routerProductos);
-app.use("/carritos", routerCarrito);
+app.use("/api/productos", routerProductos);
+app.use("/api/carritos", routerCarritos);
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const server = app.listen(PORT, () => {
 	console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
