@@ -1,9 +1,14 @@
-import express from "express";
-import Carrito from "../clases/Carrito.class.js";
+const express = require ("express");
+const carrito = require ("../clases/Carrito.class.js")
+//const carrito = () => {require ("../clases/Carrito.class.js")};
 
 const router = express.Router();
+//app.use("/api", router);
 
-const carrito = new Carrito();
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
+//const carrito = new Carrito();
 
 router.post("/", async (req, res) => { //crea el carrito
 	const carritoCreado = await carrito.addCarrito();
@@ -49,6 +54,3 @@ router.post("/:id/productos/:idPrd", async (req, res) => { //agrega un producto 
 	);
 	res.send(respuesta);
 });
-
-
-export default router;
