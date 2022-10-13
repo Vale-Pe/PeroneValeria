@@ -1,7 +1,6 @@
-const fs = require ("fs");
+import fs from "fs";
 
-const producto = function() {
-class Producto {
+export default class Producto {
 	constructor() {
 		this.id = 0;
 	}
@@ -95,6 +94,3 @@ class Producto {
 		}
 	}
 }
-}
-
-module.exports = producto

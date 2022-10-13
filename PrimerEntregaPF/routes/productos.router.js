@@ -1,9 +1,9 @@
-const express = require ("express");
-const producto = () => {require ("../clases/Producto.class.js")};
+import express from "express";
+import Producto from "../clases/Producto.class.js";
 
 const router = express.Router();
 
-//const producto = new Producto();
+const producto = new Producto();
 
 function validarAdmin(req, res, next) {
 	if (req.query.admin) {
@@ -42,3 +42,5 @@ router.put('/:id', validarAdmin, async (req, res) => {
 	const id = await producto.put(Number(req.params.id), {nombre, descripcion, codigo, foto, precio, stock, timeStamp});
 	res.json(id);
 })
+
+export default router;

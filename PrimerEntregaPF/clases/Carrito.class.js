@@ -1,9 +1,8 @@
-const Producto = require ("./Producto.class.js");
-const fs = require ("fs");
+import Producto from "./Producto.class.js";
+import fs from "fs";
 
 
-const carrito = function () {
-class Carrito {
+export default class Carrito {
 	constructor() {
 		this.producto = new Producto();
 		this.carritos = [];
@@ -123,6 +122,3 @@ class Carrito {
 		}	
 	}
 }
-}
-
-module.exports = carrito
