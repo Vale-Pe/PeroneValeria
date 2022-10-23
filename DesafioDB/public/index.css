@@ -79,7 +79,7 @@ form div input {
     height: 50vh;
     width: 40vw;
     overflow-y: auto;
-    padding: 5px;
+    padding: 5px; 
     border: 1px solid aquamarine;
     background-color: white;
 }

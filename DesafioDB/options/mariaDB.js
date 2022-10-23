@@ -6,7 +6,7 @@ const options_MySQL = {
         password: '',
         database: 'ecommerce'
     },
-    pool: { min: 0, max: 7 },
+    pool: { min: 0, max: 7 }, 
 }
 
 module.exports = { options_MySQL }

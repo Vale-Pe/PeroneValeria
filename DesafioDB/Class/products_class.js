@@ -20,7 +20,7 @@ const productTable = (async () => {
                 table.string('name').notNullable()
                 table.integer('price').notNullable()
                 table.string('pictureUrl').notNullable()
-            })
+            }) 
         }
         console.log('inserto productos iniciales')
         await knex('productos').insert(productsIniciales)

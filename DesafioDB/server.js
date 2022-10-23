@@ -54,5 +54,5 @@ io.on('connection', async (socket) => { // "connection" se ejecuta la primera ve
         console.log(mensaje)
         contenedorMensajes.save(mensaje)
         io.emit('server:mensajes', contenedorMensajes.getAll()) //envia todos los mensajes a todos los usuarios
-    });
+    }); 
 })

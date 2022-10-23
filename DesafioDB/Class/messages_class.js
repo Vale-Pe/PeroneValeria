@@ -21,7 +21,7 @@ const messageTable = (async () => {
             await knex.schema.createTable('mensajes', table => {
                 table.increments('id')
                 table.string('author')
-                table.integer('text')
+                table.integer('text') 
                 table.string('date')
             })
         }

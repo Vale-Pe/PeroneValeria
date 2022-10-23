@@ -6,4 +6,4 @@ const options_SQLite = {
     useNullAsDefault: true
 }
 
-module.exports = { options_SQLite }
+module.exports = { options_SQLite } 

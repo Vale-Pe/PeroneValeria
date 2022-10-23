@@ -23,7 +23,7 @@ function addProduct() {
 	const producto = {
 		name: document.getElementById("name").value,
 		price: document.getElementById("price").value,
-        pictureUrl: document.getElementById("pictureUrl").value
+        pictureUrl: document.getElementById("pictureUrl").value 
 	}
 
 	socket.emit('cliente:producto', producto)
