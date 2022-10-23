@@ -17,16 +17,16 @@
             <h3>Cargar Producto</h3>
             <form onsubmit="addProduct(this)"  autocomplete="off">
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre" class="form-control" type="text" name="title" required>
+                    <label for="name">name</label>
+                    <input id="name" class="form-control" type="text" name="title" required>
                 </div>
                 <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input id="precio" class="form-control" type="number" step="0.01" name="price" required>
+                    <label for="price">price</label>
+                    <input id="price" class="form-control" type="number" step="0.01" name="price" required>
                 </div>
                 <div class="form-group">
-                    <label for="foto">Foto URL</label>
-                    <input id="foto" class="form-control" type="url" name="thumbnail">
+                    <label for="pictureUrl">pictureUrl URL</label>
+                    <input id="pictureUrl" class="form-control" type="url" name="thumbnail">
                 </div>
                 <button class="btn button">Enviar</button>
             </form>
@@ -36,9 +36,9 @@
             <table class="table table-hover">
                 <thead>
                     <tr class="table-light text-center">
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Foto</th>
+                        <th scope="col">name</th>
+                        <th scope="col">price</th>
+                        <th scope="col">pictureUrl</th>
                     </tr>
                 </thead>
                 <tbody id="idTbody">

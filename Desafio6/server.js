@@ -1,5 +1,5 @@
 const express = require('express')
-const PORT = process.env.port || 8080
+const PORT = process.env.port || 8081
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
 
@@ -27,25 +27,25 @@ const messages = [
 ];
 
 const products = [
-	{ nombre: "Escuadra", precio: 200, foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-128.png" },
-	{ nombre: "calculadora", precio: 459, foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-128.png" },
-	{ nombre: "agenda", precio: 150, foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-128.png" }
+	{ name: "Escuadra", price: 200, pictureUrl: "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-128.png" },
+	{ name: "calculadora", price: 459, pictureUrl: "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-128.png" },
+	{ name: "agenda", price: 150, pictureUrl: "https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-128.png" }
 ];
 
 io.on('connection', (socket) => { // "connection" se ejecuta la primera vez que se abre una nueva conexión
     console.log('Nuevo cliente conectado') // Se imprimirá solo la primera vez que se ha abierto la conexión    
 
-    socket.emit('products', products);
+    socket.emit('products', products); //cuando alguien se conecta le llegan todos los productos
 	
-	socket.on('new-product', data => {
+	socket.on('new-product', data => { //evento que va a estar escuchando cuando carguen un producto
         products.push(data);
-        io.sockets.emit('products', products); //envia todos los mensajes a todos los usuarios
+        io.sockets.emit('products', products); //envia todos los productos a todos los usuarios
     });
 
 	//cuando alguien se conecta le llegan todos los mensjaes
     socket.emit('messages', messages);
 
-//evento que va a estar escuchando cuando manden un mensaje
+    //evento que va a estar escuchando cuando manden un mensaje
     socket.on('new-message', data => {
         messages.push(data);
         io.sockets.emit('messages', messages); //envia todos los mensajes a todos los usuarios
@@ -54,4 +54,4 @@ io.on('connection', (socket) => { // "connection" se ejecuta la primera vez que 
 
 
 // El servidor funcionando en el puerto 8080
-httpServer.listen(PORT, () => console.log('Servidor corriendo en http://localhost:8080'))
+httpServer.listen(PORT, () => console.log(`Servidor corriendo en ${PORT}}`))

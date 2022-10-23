@@ -10,9 +10,9 @@ function renderProduct(data) {
 	const html = data
 		.map((producto) => {
             let str = `<tr class="table-light text-center">
-                        <td>${producto.nombre}</td>
-                        <td>${producto.precio}</td>
-                        <td><img width=50 src='${producto.foto}' alt="imgProducto"></td>
+                        <td>${producto.name}</td>
+                        <td>${producto.price}</td>
+                        <td><img width=50 src='${producto.pictureUrl}' alt="imgProducto"></td>
                         </tr>`
 			return str
     }).join("\n")
@@ -21,9 +21,9 @@ function renderProduct(data) {
 
 function addProduct() {
 	const producto = {
-		nombre: document.getElementById("nombre").value,
-		precio: document.getElementById("precio").value,
-        foto: document.getElementById("foto").value
+		name: document.getElementById("name").value,
+		price: document.getElementById("price").value,
+        pictureUrl: document.getElementById("pictureUrl").value
 	}
 
 	socket.emit("new-product", producto)

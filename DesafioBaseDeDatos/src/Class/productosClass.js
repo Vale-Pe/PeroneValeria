@@ -14,7 +14,7 @@ const productTable = async () => {
     } catch (err) {
         console.log(err)
         productsDB.destroy()
-    }
+    }; throw err
 }
 
 class ProductosClass {
@@ -27,7 +27,7 @@ class ProductosClass {
 
     async save(producto) {
         try {
-            await productsDB(`${this.table}`).insert(producto)
+            await productsDB(`${this.table}`).insert({name: 'cartuchera', price: 500, pictureUrl: 'link not found'})
             console.log("Se ha agregado el producto correctamente")
 
         } catch (err) {

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link src="./css/style.css" type="text/css">
+    <title>Index</title>
+</head>
+
+<body>
+
+    <div id="cargarProducto">
+        <h1>Cargar Producto</h1>
+        <form id="productForm">
+            Nombre:<input id="productName" type="text" name="title"><br>
+            Precio:<input id="productPrice" type="number" name="price"><br>
+            Url:<input id="productUrl" type="text" name="thumbnail"> <br>
+            <input type="submit" value="Cargar Producto">
+        </form>
+    </div>
+
+    <div id="tablaDinamica"></div>
+    <h2>Productos</h2>
+        <div>
+            <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Imagen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productPool"></tbody>         
+            </table>
+        </div>
+
+    <h2>Chat</h2>
+        <div id="mensajesPool"></div>
+        
+        <div>
+                    <form id="chatForm">
+                            <div>
+                                <div>
+                                    <label for="username">Usuario</label>
+                                    <input id="usernameInput" type="email" placeholder="Ingrese una dirección de correo electrónico" name="username" required>
+                                </div>
+                                <div>
+                                    <label for="mensaje">Mensaje</label>
+                                    <input id="mensajeInput" type="text" placeholder="Ingrese su mensaje" name="mensaje" required>
+                                </div>
+                            </div>
+                            <button type="submit">Enviar</button>
+                    </form>
+        </div>
+            
+
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./cliente.socket.js"></script>
+</body>
+
+</html>
