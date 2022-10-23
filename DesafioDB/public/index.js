@@ -44,15 +44,14 @@ function renderMessage(data2) {
 }
 
 //funcion para enviar mensaje
-function addMessage(e) {
+function addMessage() {
     const date = new Date()
     const formatDate = date.toLocaleString();
 
-    const mensaje = [{
-        author: document.getElementById('name').value,
+    const mensaje = {
+        author: document.getElementById('email').value,
         date: formatDate,
         text: document.getElementById('text').value
-    }];
+    };
     socket.emit('cliente:mensaje', mensaje);
-    return false;
 }
