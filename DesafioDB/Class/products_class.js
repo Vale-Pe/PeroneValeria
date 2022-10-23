@@ -1,7 +1,6 @@
 //importo la configuarcion para inicializar
-const { optionsMySQL } = require('../options/mariaDB');
-//importo el modulo knex y lo inicializo
-const knex = require('knex')(optionsMySQL);
+const { options_MySQL } = require('../options/mariaDB')
+const knex = require('knex')(options_MySQL)
 
 const productsIniciales = [
 	{ name: "Escuadra", price: 200, pictureUrl: "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-128.png" },
@@ -26,8 +25,8 @@ const productTable = (async () => {
         console.log('inserto productos iniciales')
         await knex('productos').insert(productsIniciales)
         console.log('leo todos los productos')
-        let rows = await knex.from('productos').select('*')
-        for (row of rows) console.log(`${row['id']} ${row['name']} ${row['price']} ${row['pictureUrl']}`)
+        let prods = await knex.from('productos').select('*')
+        for (let prod of prods) console.log(`${prod['id']} ${prod['name']} ${prod['price']} ${prod['pictureUrl']}`)
     }
     catch(err) {
         console.log(err); throw err
@@ -37,19 +36,20 @@ const productTable = (async () => {
     };
 })()
 
-class ProductosClass {
-    constructor() {
-        /* this.config = config */
-        this.table = 'productos'
+class ContenedorProductos {
+    constructor(knex){
+        this.db = require('knex')(options_MySQL);
+        this.table = 'productos';
+        /* console.log(this.db) */
     }
 
     // Guardar producto
     async save(producto) {
         try {
-            await knex(`${this.table}`).insert(producto)
+            await (this.db)(`${this.table}`).insert(producto)
             console.log("Se ha agregado el producto correctamente")
         }
-		catch (err) {
+		catch(err) {
             console.log(err); throw err
         }
     }
@@ -57,16 +57,16 @@ class ProductosClass {
     // Obtener todos los productos
     async getAll() {
         try {
-            const productos = await knex.from(`${this.table}`).select("*")
-			for (p of productos) console.log(`${p['id']} ${p['name']} ${p['price']} ${p['pictureUrl']}`)
+            const productos = await (this.db).from(`${this.table}`).select("*")
+			for (let p of productos) console.log(`${p['id']} ${p['name']} ${p['price']} ${p['pictureUrl']}`)
             return productos
         }
-		catch (error) {
-            if (error.code == "ER_NO_SUCH_TABLE") {
+		catch (err) {
+            if (err.code == "ER_NO_SUCH_TABLE") {
                 productTable()
             }else {
                 console.log(
-                    `Ocurrio el siguiente error al guardar el mensaje: ${error}`
+                    `Ocurrio el siguiente error al guardar el producto: ${err}`
                 ); throw err
             }
         }
@@ -75,7 +75,7 @@ class ProductosClass {
     // Eliminar producto
     async delete(id) {
         try {
-            await knex.from(`${this.table}`).where("id", "=", id).del()
+            await (this.db).from(`${this.table}`).where("id", "=", id).del()
 			console.log("Producto eliminado correctamente")
         }
 		catch (err) {
@@ -84,4 +84,4 @@ class ProductosClass {
     }
 }
 
-module.exports = ProductosClass;
+module.exports = ContenedorProductos;

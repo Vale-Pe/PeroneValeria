@@ -1,6 +1,4 @@
-const knex = require('knex')
-
-const options = {
+const options_MySQL = {
     client: 'mysql',
     connection: {
         host: '127.0.0.1',
@@ -10,7 +8,5 @@ const options = {
     },
     pool: { min: 0, max: 7 },
 }
-
-const options_MySQL = knex(options)
 
 module.exports = { options_MySQL }
