@@ -84,7 +84,7 @@ form div input {
     background-color: white;
 }
 
-#username, #texto,  #submitChat{
+#name, #texto,  #submitChat{
     margin-top: 5px;
     border-radius: 10px;
 }

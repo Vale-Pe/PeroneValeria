@@ -3,6 +3,9 @@ const socket = io(); // Ya podemos empezar a usar los sockets desde el cliente
 //funcion que recibe los productos
 socket.on('server:productos', (data) => { renderProduct(data); });
 
+//funcion que recibe los mensajes
+socket.on('server:mensajes', (data2) => { renderMessage(data2); });
+
 function renderProduct(data) {
     console.log(data)
 	const html = data.map((producto) => {
@@ -24,4 +27,32 @@ function addProduct() {
 	}
 
 	socket.emit('cliente:producto', producto)
+}
+
+//funcion para agregar mensaje
+function renderMessage(data2) {
+    console.log(data2)
+    const html = data2.map((mensaje) => {
+        let msj = `<div class="mensajeChat">
+            <strong class="autorChat">${mensaje.author}</strong>
+            <p class="fechaChat">(${mensaje.date}):</p>
+            <p class="textoChat">${mensaje.text}</p> </div>`
+        return msj
+    }).join(" ");
+    document.getElementById('messages').innerHTML = html;
+
+}
+
+//funcion para enviar mensaje
+function addMessage(e) {
+    const date = new Date()
+    const formatDate = date.toLocaleString();
+
+    const mensaje = [{
+        author: document.getElementById('name').value,
+        date: formatDate,
+        text: document.getElementById('text').value
+    }];
+    socket.emit('cliente:mensaje', mensaje);
+    return false;
 }

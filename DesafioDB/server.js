@@ -15,6 +15,9 @@ const knex = require('knex')(options_MySQL)
 const ContenedorProductos = require('./Class/products_class')
 const contenedorProductos = new ContenedorProductos( options_MySQL , 'productos')
 
+const ContenedorMensajes = require('./Class/messages_class')
+const contenedorMensajes = new ContenedorMensajes ()
+
 //Ruta estatica
 app.use(express.static('./public')) // Indicamos que queremos cargar los archivos estáticos que se encuentran en dicha carpeta
 
@@ -42,5 +45,14 @@ io.on('connection', async (socket) => { // "connection" se ejecuta la primera ve
         console.log(producto)
         contenedorProductos.save(producto)
         io.emit('server:productos', contenedorProductos.getAll()) //envia todos los productos a todos los usuarios
+    });
+
+    //MENSAJES
+    socket.emit('server:mensajes', await contenedorMensajes.getAll()); //cuando alguien se conecta le llegan todos los mensajes
+
+    socket.on('cliente:mensaje', mensaje => { //evento que va a estar escuchando cuando carguen un mensaje
+        console.log(mensaje)
+        contenedorMensajes.save(mensaje)
+        io.emit('server:mensajes', contenedorMensajes.getAll()) //envia todos los mensajes a todos los usuarios
     });
 })
