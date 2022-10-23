@@ -17,9 +17,9 @@ const productTable = (async () => {
         } else {
             await knex.schema.createTable('productos', table => {
                 table.increments('id')
-                table.string('name')
-                table.integer('price')
-                table.string('pictureUrl')
+                table.string('name').notNullable()
+                table.integer('price').notNullable()
+                table.string('pictureUrl').notNullable()
             })
         }
         console.log('inserto productos iniciales')
@@ -46,8 +46,8 @@ class ContenedorProductos {
     // Guardar producto
     async save(producto) {
         try {
-            await (this.db)(`${this.table}`).insert(producto)
             console.log("Se ha agregado el producto correctamente")
+            return await (this.db)(`${this.table}`).insert(producto)
         }
 		catch(err) {
             console.log(err); throw err
@@ -62,7 +62,7 @@ class ContenedorProductos {
             return productos
         }
 		catch (err) {
-            if (err.code == "ER_NO_SUCH_TABLE") {
+            if (err.code == 'ER_NO_SUCH_TABLE') {
                 productTable()
             }else {
                 console.log(
@@ -75,8 +75,8 @@ class ContenedorProductos {
     // Eliminar producto
     async delete(id) {
         try {
-            await (this.db).from(`${this.table}`).where("id", "=", id).del()
-			console.log("Producto eliminado correctamente")
+            console.log("Producto eliminado correctamente")
+            return await (this.db).from(`${this.table}`).where("id", "=", id).del()
         }
 		catch (err) {
             console.log(err); throw err

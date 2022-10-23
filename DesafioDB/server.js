@@ -38,23 +38,9 @@ io.on('connection', async (socket) => { // "connection" se ejecuta la primera ve
     socket.emit('server:productos', await contenedorProductos.getAll()); //cuando alguien se conecta le llegan todos los productos
 	
 	/* socket.on('new-product', data */ 
-    socket.on('newProduct', producto => { //evento que va a estar escuchando cuando carguen un producto
+    socket.on('cliente:producto', producto => { //evento que va a estar escuchando cuando carguen un producto
         console.log(producto)
         contenedorProductos.save(producto)
-        io.socket.emit('server:productos', contenedorProductos.getAll()) //envia todos los productos a todos los usuarios
+        io.emit('server:productos', contenedorProductos.getAll()) //envia todos los productos a todos los usuarios
     });
 })
-
-
-/* const Productos = require('./Class/products_class')
-const script = require('./script')
-
-//importo la configuarcion para inicializar
-const { optionsMySQL } = require('./options/mariaDB');
-//importo el modulo knex y lo inicializo
-const knex = require('knex')(optionsMySQL);
-
-let productos = knex.from('productos').select('*')
-console.log(productos)
-
-let products = new Productos('productos', optionsMySQL) */

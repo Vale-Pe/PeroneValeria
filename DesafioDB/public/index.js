@@ -23,6 +23,5 @@ function addProduct() {
         pictureUrl: document.getElementById("pictureUrl").value
 	}
 
-	socket.emit("new-product", producto)
+	socket.emit('cliente:producto', producto)
 }
-
