@@ -10,7 +10,6 @@ const productsIniciales = [
 
 const productTable = (async () => {
 	try{
-        console.log('creo tabla de productos y agrego 4 columnas')
         const tableExists = await knex.schema.hasTable('productos')
         if (tableExists) {
             await knex.schema.dropTable('productos')
@@ -20,12 +19,13 @@ const productTable = (async () => {
                 table.string('name').notNullable()
                 table.integer('price').notNullable()
                 table.string('pictureUrl').notNullable()
+                console.log('creo tabla de productos y agrego 4 columnas')
             })
         }
-        console.log('inserto productos iniciales')
         await knex('productos').insert(productsIniciales)
-        console.log('leo todos los productos')
+        console.log('inserto productos iniciales')
         let prods = await knex.from('productos').select('*')
+        console.log('leo todos los productos')
         for (let prod of prods) console.log(`${prod['id']} ${prod['name']} ${prod['price']} ${prod['pictureUrl']}`)
     }
     catch(err) {

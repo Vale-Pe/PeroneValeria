@@ -13,7 +13,6 @@ const messagesIniciales = [
 
 const messageTable = (async () => {
 	try{
-        console.log('creo tabla de mensajes y agrego 4 columnas')
         const tableExists = await knex.schema.hasTable('mensajes')
         if (tableExists) {
             await knex.schema.dropTable('mensajes')
@@ -23,12 +22,13 @@ const messageTable = (async () => {
                 table.string('author')
                 table.integer('text')
                 table.string('date')
+                console.log('creo tabla de mensajes y agrego 4 columnas')
             })
         }
-        console.log('inserto mensajes iniciales')
         await knex('mensajes').insert(messagesIniciales)
-        console.log('leo todos los mensajes')
+        console.log('inserto mensajes iniciales')
         let msjs = await knex.from('mensajes').select('*')
+        console.log('leo todos los mensajes')
         for (let msj of msjs) console.log(`${msj['id']} ${msj['author']} ${msj['date']} ${msj['text']}`)
     }
     catch(err) {
